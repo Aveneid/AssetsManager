@@ -154,6 +154,7 @@ Partial Class frmDepartments
         Me.ClientSize = New System.Drawing.Size(804, 461)
         Me.Controls.Add(Me.dgvDepartments)
         Me.Controls.Add(Me.Panel1)
+        Me.KeyPreview = True
         Me.MinimumSize = New System.Drawing.Size(820, 500)
         Me.Name = "frmDepartments"
         Me.Text = "frmDepartments"

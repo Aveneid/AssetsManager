@@ -32,10 +32,11 @@ Partial Class frmWarehousesEdit
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbWrhsName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbWarehouses = New System.Windows.Forms.ComboBox()
         Me.cbWrhsRespEmployee = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cbWrhsDepartment = New System.Windows.Forms.ComboBox()
+        Me.lbWarehouse = New System.Windows.Forms.Label()
+        Me.wrhsID = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label5
@@ -130,17 +131,6 @@ Partial Class frmWarehousesEdit
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "Magazyn"
         '
-        'cbWarehouses
-        '
-        Me.cbWarehouses.DisplayMember = "key"
-        Me.cbWarehouses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbWarehouses.FormattingEnabled = True
-        Me.cbWarehouses.Location = New System.Drawing.Point(105, 25)
-        Me.cbWarehouses.Name = "cbWarehouses"
-        Me.cbWarehouses.Size = New System.Drawing.Size(239, 21)
-        Me.cbWarehouses.TabIndex = 0
-        Me.cbWarehouses.ValueMember = "value"
-        '
         'cbWrhsRespEmployee
         '
         Me.cbWrhsRespEmployee.DisplayMember = "Key"
@@ -174,11 +164,34 @@ Partial Class frmWarehousesEdit
         Me.cbWrhsDepartment.TabIndex = 4
         Me.cbWrhsDepartment.ValueMember = "Value"
         '
+        'lbWarehouse
+        '
+        Me.lbWarehouse.AutoSize = True
+        Me.lbWarehouse.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lbWarehouse.Location = New System.Drawing.Point(91, 26)
+        Me.lbWarehouse.Name = "lbWarehouse"
+        Me.lbWarehouse.Size = New System.Drawing.Size(29, 20)
+        Me.lbWarehouse.TabIndex = 28
+        Me.lbWarehouse.Text = "     "
+        '
+        'wrhsID
+        '
+        Me.wrhsID.Enabled = False
+        Me.wrhsID.Location = New System.Drawing.Point(12, 299)
+        Me.wrhsID.MaxLength = 30
+        Me.wrhsID.Name = "wrhsID"
+        Me.wrhsID.Size = New System.Drawing.Size(48, 20)
+        Me.wrhsID.TabIndex = 29
+        Me.wrhsID.Text = "0"
+        Me.wrhsID.Visible = False
+        '
         'frmWarehousesEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 331)
+        Me.Controls.Add(Me.wrhsID)
+        Me.Controls.Add(Me.lbWarehouse)
         Me.Controls.Add(Me.cbWrhsDepartment)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.cbWrhsRespEmployee)
@@ -192,7 +205,6 @@ Partial Class frmWarehousesEdit
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.tbWrhsName)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cbWarehouses)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
         Me.Name = "frmWarehousesEdit"
@@ -212,8 +224,9 @@ Partial Class frmWarehousesEdit
     Friend WithEvents Label2 As Label
     Friend WithEvents tbWrhsName As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents cbWarehouses As ComboBox
     Friend WithEvents cbWrhsRespEmployee As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents cbWrhsDepartment As ComboBox
+    Friend WithEvents lbWarehouse As Label
+    Friend WithEvents wrhsID As TextBox
 End Class

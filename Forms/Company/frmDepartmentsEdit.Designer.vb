@@ -22,7 +22,6 @@ Partial Class frmDepartmentsEdit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cbDepartments = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbDeptName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -34,18 +33,9 @@ Partial Class frmDepartmentsEdit
         Me.btnEditSave = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tbDeptIdx = New System.Windows.Forms.TextBox()
+        Me.lbDepartment = New System.Windows.Forms.Label()
+        Me.deptID = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
-        '
-        'cbDepartments
-        '
-        Me.cbDepartments.DisplayMember = "key"
-        Me.cbDepartments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDepartments.FormattingEnabled = True
-        Me.cbDepartments.Location = New System.Drawing.Point(104, 25)
-        Me.cbDepartments.Name = "cbDepartments"
-        Me.cbDepartments.Size = New System.Drawing.Size(239, 21)
-        Me.cbDepartments.TabIndex = 0
-        Me.cbDepartments.ValueMember = "value"
         '
         'Label1
         '
@@ -123,6 +113,7 @@ Partial Class frmDepartmentsEdit
         '
         'btnEditSave
         '
+        Me.btnEditSave.Enabled = False
         Me.btnEditSave.Location = New System.Drawing.Point(379, 23)
         Me.btnEditSave.Name = "btnEditSave"
         Me.btnEditSave.Size = New System.Drawing.Size(75, 23)
@@ -148,11 +139,34 @@ Partial Class frmDepartmentsEdit
         Me.tbDeptIdx.Size = New System.Drawing.Size(239, 20)
         Me.tbDeptIdx.TabIndex = 3
         '
+        'lbDepartment
+        '
+        Me.lbDepartment.AutoSize = True
+        Me.lbDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lbDepartment.Location = New System.Drawing.Point(100, 26)
+        Me.lbDepartment.Name = "lbDepartment"
+        Me.lbDepartment.Size = New System.Drawing.Size(29, 20)
+        Me.lbDepartment.TabIndex = 14
+        Me.lbDepartment.Text = "     "
+        '
+        'deptID
+        '
+        Me.deptID.Enabled = False
+        Me.deptID.Location = New System.Drawing.Point(12, 299)
+        Me.deptID.MaxLength = 30
+        Me.deptID.Name = "deptID"
+        Me.deptID.Size = New System.Drawing.Size(29, 20)
+        Me.deptID.TabIndex = 15
+        Me.deptID.Text = "0"
+        Me.deptID.Visible = False
+        '
         'frmDepartmentsEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 331)
+        Me.Controls.Add(Me.deptID)
+        Me.Controls.Add(Me.lbDepartment)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.tbDeptIdx)
         Me.Controls.Add(Me.btnEditSave)
@@ -164,7 +178,6 @@ Partial Class frmDepartmentsEdit
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.tbDeptName)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cbDepartments)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
         Me.MaximizeBox = False
@@ -175,8 +188,6 @@ Partial Class frmDepartmentsEdit
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cbDepartments As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents tbDeptName As TextBox
     Friend WithEvents Label2 As Label
@@ -188,4 +199,6 @@ Partial Class frmDepartmentsEdit
     Friend WithEvents btnEditSave As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents tbDeptIdx As TextBox
+    Friend WithEvents lbDepartment As Label
+    Friend WithEvents deptID As TextBox
 End Class

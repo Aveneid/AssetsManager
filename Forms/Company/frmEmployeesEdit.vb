@@ -2,11 +2,10 @@
 
 Public Class frmEmployeesEdit
     Dim _emp As Employee = Nothing
-    Public preview As Boolean = False
-
     Sub setEmp(emp As Employee)
         _emp = emp
-        cbEmployees.Enabled = False
+
+        lbEmployee.Text = _emp.name
     End Sub
     Private Sub frmEmployeesEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Globals.populateEmployees()
@@ -14,140 +13,135 @@ Public Class frmEmployeesEdit
         cbEmpPosition.Items.Clear()
 
 
-        cbEmployees.Items.Add("--- Dodaj ---")
-        For Each emp As Employee In Globals.employees
-            cbEmployees.Items.Add(New DictionaryEntry(emp.name, emp.id))
-        Next
-
         cbEmpAccessLevel.Items.Clear()
-        'cbEmployees.Items.Add("--- Dodaj ---")
+
         For Each aclv As DataRow In SQLDriver.sqlExeQuery("SELECT * FROM INV_access_lv").Rows
             cbEmpAccessLevel.Items.Add(New DictionaryEntry(aclv.ItemArray(1), aclv.ItemArray(0)))
         Next
 
-        cbEmpPosition.Items.Add("--- Dodaj ---")
         For Each pos In Globals.positions
             cbEmpPosition.Items.Add(New DictionaryEntry(pos.name, pos.id))
         Next
+        cbEmpAccessLevel.SelectedIndex = 0
+        cbEmpPosition.SelectedIndex = 0
 
-        If _emp IsNot Nothing And _emp.name <> "" Then
+        If _emp IsNot Nothing Then
 
-
-            For Each item In cbEmployees.Items
-                If item.GetType().ToString <> "System.String" Then
-                    If item.value = _emp.id Then
-                        cbEmployees.SelectedItem = item
+            For Each itm In cbEmpAccessLevel.Items
+                    If itm.value = _emp.access_lv Then
+                        cbEmpAccessLevel.SelectedItem = itm
                         Exit For
                     End If
-                End If
-            Next
+                Next
 
-            For Each item In cbEmpAccessLevel.Items
-                If item.GetType().ToString <> "System.String" Then
-                    If item.value = _emp.access_lv Then
-                        cbEmpAccessLevel.SelectedItem = item
+                For Each itm In cbEmpPosition.Items
+                    If itm.value = _emp.position.id Then
+                        cbEmpPosition.SelectedItem = itm
                         Exit For
                     End If
-                End If
-            Next
+                Next
 
-            For Each item In cbEmpPosition.Items
-                If item.GetType().ToString <> "System.String" Then
-                    If item.value = _emp.position Then
-                        cbEmpPosition.SelectedItem = item
-                        Exit For
-                    End If
-                End If
-            Next
-
-            tbEmpName.Text = _emp.name
-            tbEmpPassword.Text = "******"
-            tbEmpPhone.Text = _emp.phone
+                tbEmpName.Text = _emp.name
+                tbEmpPassword.Text = "******"
+                tbEmpPhone.Text = _emp.phone
 
 
-            btnEditSave.Text = "Zapisz"
+                btnEditSave.Text = "Zapisz"
+                tbEmpId.Text = _emp.id
+                tbEmpUsername.Text = _emp.username
+            End If
 
+        If _emp Is Nothing Then
 
-        ElseIf _emp IsNot Nothing And _emp.name = Nothing Then
-
-            cbEmployees.SelectedIndex = 0
-            cbEmployees.Enabled = False
             tbEmpPassword.Enabled = True
             cbEmpAccessLevel.Enabled = True
             tbEmpUsername.Enabled = True
+            tbEmpName.Enabled = True
+            btnEditSave.Enabled = True
+            tbEmpPhone.Enabled = True
+            lbEmployee.Text = "nowy..."
+            btnEditSave.Text = "Dodaj"
+            btnPasswordChange.Visible = False
+            cbEmpAccessLevel.Enabled = True
+            cbEmpPosition.Enabled = True
 
-            cbEmpAccessLevel.SelectedIndex = 0
         End If
 
-
-        checkUserAccessLevel()
-
-        If preview Then
-            btnEditSave.Visible = False
-            btnPasswordChange.Visible = False
-
+        If _emp IsNot Nothing Then
+            checkUserAccessLevel()
         End If
 
     End Sub
 
     Sub checkUserAccessLevel()
-        If Not preview Then
-            If _emp.id = Globals.loggedEmployee.id Or Globals.loggedEmployee.access_lv > 3 Then
-                btnEditSave.Enabled = True
-                tbEmpPhone.Enabled = True
-
-            End If
-            If Globals.loggedEmployee.access_lv > 3 Then
-                cbEmpPosition.Enabled = True
-                cbEmpAccessLevel.Enabled = True
-                tbEmpName.Enabled = True
-            End If
-        End If
-
-
-    End Sub
-
-    Private Sub cbEmployees_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbEmployees.SelectedValueChanged
-        If cbEmployees.SelectedItem IsNot Nothing And cbEmployees.SelectedIndex > 0 Then
-            Dim emp = Globals.employees.Find(Function(c) c.id = cbEmployees.SelectedItem.value)
-            tbEmpName.Text = emp.name
-            tbEmpPhone.Text = emp.phone
-            cbEmpPosition.Text = emp.position
-            tbEmpUsername.Text = emp.username
-            tbEmpPassword.Text = "******"
-            tbEmpAccessLv.Text = emp.access_lv
-            tbEmpId.Text = emp.id
-
-            For Each item In cbEmpAccessLevel.Items
-                If item.GetType().ToString <> "System.String" Then
-                    If item.value = emp.access_lv Then
-                        cbEmpAccessLevel.SelectedItem = item
-                        Exit For
-                    End If
-                End If
-            Next
-
-
-            tbEmpName.Enabled = False
-            tbEmpPhone.Enabled = False
-            cbEmpPosition.Enabled = False
-            btnPasswordChange.Enabled = False
-
-
-        End If
-        If cbEmployees.Text = "--- Dodaj ---" Then
-            tbEmpName.Enabled = True
+        If _emp.id = Globals.loggedEmployee.id Or Globals.loggedEmployee.access_lv > 3 Then
+            btnEditSave.Enabled = True
             tbEmpPhone.Enabled = True
-            cbEmpPosition.Enabled = True
-            btnPasswordChange.Enabled = False
-            tbEmpUsername.Visible = True
-
-            btnEditSave.Text = "Dodaj"
-
+            btnPasswordChange.Visible = True
+            btnPasswordChange.Enabled = True
+            btnEditSave.Visible = true
         End If
+        If Globals.loggedEmployee.access_lv > 3 Then
+            cbEmpPosition.Enabled = True
+            cbEmpAccessLevel.Enabled = True
+            tbEmpName.Enabled = True
+        End If
+
+        If _emp.id = Globals.loggedEmployee.id And Globals.loggedEmployee.access_lv > 3 Then
+            cbEmpAccessLevel.Enabled = False
+        End If
+
+        If _emp.access_lv > 3 Then
+            cbEmpAccessLevel.Enabled = False
+        End If
+
+
+
     End Sub
+
+    'Private Sub cbEmployees_SelectedValueChanged(sender As Object, e As EventArgs)
+    '    If cbEmployees.SelectedItem IsNot Nothing And cbEmployees.SelectedIndex > 0 Then
+    '        Dim emp = Globals.employees.Find(Function(c) c.id = cbEmployees.SelectedItem.value)
+    '        tbEmpName.Text = emp.name
+    '        tbEmpPhone.Text = emp.phone
+    '        cbEmpPosition.Text = emp.position
+    '        tbEmpUsername.Text = emp.username
+    '        tbEmpPassword.Text = "******"
+    '        tbEmpAccessLv.Text = emp.access_lv
+    '        tbEmpId.Text = emp.id
+
+    '        For Each item In cbEmpAccessLevel.Items
+    '            If item.GetType().ToString <> "System.String" Then
+    '                If item.value = emp.access_lv Then
+    '                    cbEmpAccessLevel.SelectedItem = item
+    '                    Exit For
+    '                End If
+    '            End If
+    '        Next
+
+
+    '        tbEmpName.Enabled = False
+    '        tbEmpPhone.Enabled = False
+    '        cbEmpPosition.Enabled = False
+    '        btnPasswordChange.Enabled = False
+
+
+    '    End If
+    '    If cbEmployees.Text = "--- Dodaj ---" Then
+    '        tbEmpName.Enabled = True
+    '        tbEmpPhone.Enabled = True
+    '        cbEmpPosition.Enabled = True
+    '        btnPasswordChange.Enabled = False
+    '        tbEmpUsername.Visible = True
+
+    '        btnEditSave.Text = "Dodaj"
+
+    '    End If
+    'End Sub
 
     Private Sub btnPasswordChange_CheckedChanged(sender As Object, e As EventArgs) Handles btnPasswordChange.CheckedChanged
+
+        'rewrite this shit, maybe new form?
 
         If btnPasswordChange.Checked Then
             tbEmpPassword.Enabled = True
@@ -198,7 +192,8 @@ Public Class frmEmployeesEdit
                     Exit Sub
                 End If
                 'updating password
-                Dim emp = New Employee(tbEmpName.Text, tbEmpUsername.Text, SQLDriver.createhashMD5(tbEmpPassword.Text), Globals.findPositionById(cbEmpPosition.SelectedValue), tbEmpPhone.Text, tbEmpAccessLv.Text, tbEmpId.Text)
+                Dim emp = New Employee(tbEmpName.Text, tbEmpUsername.Text, SQLDriver.createhashMD5(tbEmpPassword.Text),
+                                       Globals.findPositionById(cbEmpPosition.SelectedItem.value), tbEmpPhone.Text, cbEmpAccessLevel.SelectedItem.value, tbEmpId.Text)
                 If Not Globals.saveEmployee(emp) Then
                     MsgBox("Wystąpił problem podczas zapisu danych.")
                     Exit Sub
@@ -215,6 +210,7 @@ Public Class frmEmployeesEdit
 
                 btnEditSave.Enabled = True
                 btnClose.Enabled = True
+                cbEmpAccessLevel.Enabled = False
 
 
             Else
@@ -230,12 +226,14 @@ Public Class frmEmployeesEdit
     End Sub
 
     Private Sub btnEditSave_Click(sender As Object, e As EventArgs) Handles btnEditSave.Click
+
+        'rewrite this
         Select Case btnEditSave.Text
             Case "Edytuj"
 
             Case "Dodaj"
                 If Not (tbEmpName.Text.Length = 0 And tbEmpPassword.Text.Length = 0 And tbEmpUsername.Text.Length = 0 And cbEmpPosition.Text.Length = 0) Then
-                    Dim emp = New Employee(tbEmpName.Text, tbEmpUsername.Text, tbEmpPassword.Text, Globals.findPositionById(cbEmpPosition.SelectedValue), tbEmpPhone.Text, cbEmpAccessLevel.SelectedValue, _emp.id)
+                    Dim emp = New Employee(tbEmpName.Text, tbEmpUsername.Text, tbEmpPassword.Text, Globals.findPositionById(cbEmpPosition.SelectedItem.value), tbEmpPhone.Text, cbEmpAccessLevel.SelectedItem.value)
                     If Not Globals.addEmployee(emp) Then
                         MsgBox("Wystąpił problem podczas zapisu danych.")
                         Exit Sub

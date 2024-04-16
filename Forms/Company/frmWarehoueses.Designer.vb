@@ -119,12 +119,14 @@ Partial Class frmWarehouses
         '
         'btnAdd
         '
+        Me.btnAdd.Enabled = False
         Me.btnAdd.Location = New System.Drawing.Point(12, 12)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 0
         Me.btnAdd.Text = "Dodaj"
         Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnAdd.Visible = False
         '
         'ContextMenuStrip1
         '
@@ -162,6 +164,7 @@ Partial Class frmWarehouses
         Me.ClientSize = New System.Drawing.Size(804, 461)
         Me.Controls.Add(Me.dgvWarehouses)
         Me.Controls.Add(Me.Panel1)
+        Me.KeyPreview = True
         Me.MinimumSize = New System.Drawing.Size(820, 500)
         Me.Name = "frmWarehouses"
         Me.Text = "frmWarehouses"

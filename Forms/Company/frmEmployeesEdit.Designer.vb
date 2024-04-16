@@ -22,7 +22,6 @@ Partial Class frmEmployeesEdit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cbEmployees = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbEmpName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -43,19 +42,8 @@ Partial Class frmEmployeesEdit
         Me.tbEmpId = New System.Windows.Forms.TextBox()
         Me.tbEmpPassword2 = New System.Windows.Forms.TextBox()
         Me.cbEmpPosition = New System.Windows.Forms.ComboBox()
+        Me.lbEmployee = New System.Windows.Forms.Label()
         Me.SuspendLayout()
-        '
-        'cbEmployees
-        '
-        Me.cbEmployees.DisplayMember = "key"
-        Me.cbEmployees.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEmployees.Enabled = False
-        Me.cbEmployees.FormattingEnabled = True
-        Me.cbEmployees.Location = New System.Drawing.Point(104, 25)
-        Me.cbEmployees.Name = "cbEmployees"
-        Me.cbEmployees.Size = New System.Drawing.Size(239, 21)
-        Me.cbEmployees.TabIndex = 0
-        Me.cbEmployees.ValueMember = "value"
         '
         'Label1
         '
@@ -124,7 +112,7 @@ Partial Class frmEmployeesEdit
         'btnEditSave
         '
         Me.btnEditSave.Enabled = False
-        Me.btnEditSave.Location = New System.Drawing.Point(377, 23)
+        Me.btnEditSave.Location = New System.Drawing.Point(377, 26)
         Me.btnEditSave.Name = "btnEditSave"
         Me.btnEditSave.Size = New System.Drawing.Size(75, 23)
         Me.btnEditSave.TabIndex = 1
@@ -254,11 +242,22 @@ Partial Class frmEmployeesEdit
         Me.cbEmpPosition.TabIndex = 24
         Me.cbEmpPosition.ValueMember = "value"
         '
+        'lbEmployee
+        '
+        Me.lbEmployee.AutoSize = True
+        Me.lbEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lbEmployee.Location = New System.Drawing.Point(100, 26)
+        Me.lbEmployee.Name = "lbEmployee"
+        Me.lbEmployee.Size = New System.Drawing.Size(41, 20)
+        Me.lbEmployee.TabIndex = 25
+        Me.lbEmployee.Text = "        "
+        '
         'frmEmployeesEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 331)
+        Me.Controls.Add(Me.lbEmployee)
         Me.Controls.Add(Me.tbEmpId)
         Me.Controls.Add(Me.tbEmpAccessLv)
         Me.Controls.Add(Me.tbEmpUsername)
@@ -277,7 +276,6 @@ Partial Class frmEmployeesEdit
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.tbEmpName)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cbEmployees)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.cbEmpPosition)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -290,8 +288,6 @@ Partial Class frmEmployeesEdit
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cbEmployees As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents tbEmpName As TextBox
     Friend WithEvents Label2 As Label
@@ -312,4 +308,5 @@ Partial Class frmEmployeesEdit
     Friend WithEvents tbEmpId As TextBox
     Friend WithEvents tbEmpPassword2 As TextBox
     Friend WithEvents cbEmpPosition As ComboBox
+    Friend WithEvents lbEmployee As Label
 End Class

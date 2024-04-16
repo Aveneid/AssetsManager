@@ -3,7 +3,7 @@
 Public Class frmDepartments
     Dim dtDepartments As DataTable = New DataTable
     Dim _dept As Department
-    Sub loadData()
+    Sub loadData(Optional setCell As Boolean = True)
 
         Dim tmpCell = Nothing
         If dgvDepartments.CurrentCell IsNot Nothing Then
@@ -19,7 +19,8 @@ Public Class frmDepartments
 
         dgvDepartments.DataSource = dtDepartments
 
-        If tmpCell IsNot Nothing Then
+        If tmpCell IsNot Nothing And setCell Then
+
             dgvDepartments.Rows(tmpCell(0)).Cells(tmpCell(1)).Selected = True
         End If
 
@@ -49,11 +50,10 @@ Public Class frmDepartments
 
     Private Sub dgvDepartments_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDepartments.CellDoubleClick
         If e.RowIndex >= 0 Then
-            Dim dpt As Department = New Department(dgvDepartments.Rows(e.RowIndex).Cells(1).Value, dgvDepartments.Rows(e.RowIndex).Cells(2).Value.ToString, dgvDepartments.Rows(e.RowIndex).Cells(3).Value.ToString, dgvDepartments.Rows(e.RowIndex).Cells(4).Value.ToString, dgvDepartments.Rows(e.RowIndex).Cells(0).Value)
             Dim frmDpt = New frmDepartmentsEdit
-            frmDpt.setDept(dpt)
+            frmDpt.setDept(Globals.findDepartmentById(dgvDepartments.Rows(e.RowIndex).Cells(0).Value))
             frmDpt.TopMost = True
-            frmDpt.Show()
+            frmDpt.ShowDialog()
 
             loadData()
         End If
@@ -78,29 +78,31 @@ Public Class frmDepartments
     Private Sub EdytujToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EdytujToolStripMenuItem.Click
         Dim curRow = dgvDepartments.CurrentRow.Index
         If dgvDepartments.CurrentRow.Index > 0 Then
-            Dim dpt As Department = New Department(dgvDepartments.Rows(curRow).Cells(1).Value, dgvDepartments.Rows(curRow).Cells(2).Value.ToString, dgvDepartments.Rows(curRow).Cells(3).Value.ToString, dgvDepartments.Rows(curRow).Cells(4).Value.ToString, dgvDepartments.Rows(curRow).Cells(0).Value)
             Dim frmDpt = New frmDepartmentsEdit
-            frmDpt.setDept(dpt)
+            frmDpt.setDept(Globals.findDepartmentById(dgvDepartments.Rows(curRow).Cells(0).Value))
             frmDpt.TopMost = True
             frmDpt.Show()
             loadData()
         End If
     End Sub
-    Sub setDept()
-        Dim curRow = dgvDepartments.CurrentRow.Index
-        _dept = New Department(dgvDepartments.Rows(curRow).Cells(1).Value, dgvDepartments.Rows(curRow).Cells(2).Value.ToString, dgvDepartments.Rows(curRow).Cells(3).Value.ToString, dgvDepartments.Rows(curRow).Cells(4).Value.ToString, dgvDepartments.Rows(curRow).Cells(0).Value)
-    End Sub
 
     Private Sub UsuńToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuńToolStripMenuItem.Click
-        Dim curRow = dgvDepartments.CurrentRow.Index
-        _dept = New Department(dgvDepartments.Rows(curRow).Cells(1).Value, dgvDepartments.Rows(curRow).Cells(2).Value.ToString, dgvDepartments.Rows(curRow).Cells(3).Value.ToString, dgvDepartments.Rows(curRow).Cells(4).Value.ToString, dgvDepartments.Rows(curRow).Cells(0).Value)
-        If checkIfInUse(_dept) Then
-            MsgBox("Nie można usunąć wydziału który jest w użyciu!")
-        Else
-            Debug.Print("usuwam " & dgvDepartments.SelectedRows(0).Cells(1).Value)
-            ' SQLDriver.sqlExeNonQuery("DELETE FROM INV_departments WHERE id = " & dgvDepartments.SelectedRows(1).Cells(1).Value)
+        If MsgBox("Czy na pewno chcesz usunąć ten wydział?", MsgBoxStyle.YesNo, "Usuwanie wydziału") = MsgBoxResult.Yes Then
+            Dim curRow = dgvDepartments.CurrentRow.Index
+            If checkIfInUse(Globals.findDepartmentById(dgvDepartments.Rows(curRow).Cells(0).Value)) Then
+                MsgBox("Nie można usunąć wydziału który jest w użyciu!")
+            Else
+                Debug.Print("usuwam " & dgvDepartments.SelectedRows(0).Cells(1).Value)
+                Globals.deleteDepartment(Globals.findDepartmentById(dgvDepartments.Rows(curRow).Cells(0).Value))
+                MsgBox("Usunięto wydział " & dgvDepartments.Rows(curRow).Cells(1).Value)
+            End If
+            loadData(False)
         End If
     End Sub
 
-
+    Private Sub frmDepartments_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F5 Then
+            loadData(False)
+        End If
+    End Sub
 End Class

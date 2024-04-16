@@ -3,7 +3,7 @@
 Public Class frmEmployees
     Dim dtEmployees As DataTable = New DataTable
     Dim _emp As Employee
-    Sub loadData()
+    Sub loadData(Optional setCell = True)
         Dim tmpCell = Nothing
         If dgvEmployees.CurrentCell IsNot Nothing Then
             tmpCell = {dgvEmployees.CurrentCell.RowIndex, dgvEmployees.CurrentCell.ColumnIndex}
@@ -18,7 +18,7 @@ Public Class frmEmployees
         Next
 
         dgvEmployees.DataSource = dtEmployees
-        If tmpCell IsNot Nothing Then
+        If tmpCell IsNot Nothing And setCell Then
             dgvEmployees.Rows(tmpCell(0)).Cells(tmpCell(1)).Selected = True
         End If
     End Sub
@@ -37,12 +37,12 @@ Public Class frmEmployees
 
         If Globals.loggedEmployee.access_lv > 3 Then
             btnAdd.Visible = True
+            btnAdd.Enabled = True
         End If
 
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        frmEmployeesEdit.setEmp(New Employee(Nothing, Nothing, Nothing, Nothing, Nothing, Nothing))
         frmEmployeesEdit.ShowDialog()
         loadData()
     End Sub
@@ -50,12 +50,10 @@ Public Class frmEmployees
     Private Sub dgvEmployees_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployees.CellDoubleClick
         If e.RowIndex >= 0 Then
             Dim curRow = dgvEmployees.CurrentRow.Index
-            Dim emp As Employee = New Employee(dgvEmployees.Rows(curRow).Cells(1).Value, "", "", Globals.findPositionByName(dgvEmployees.Rows(curRow).Cells(2).Value), dgvEmployees.Rows(curRow).Cells(3).Value,
-                                               dgvEmployees.Rows(curRow).Cells(4).Value, dgvEmployees.Rows(curRow).Cells(0).Value)
             Dim frmEmp = New frmEmployeesEdit
-            frmEmp.setEmp(emp)
+            frmEmp.setEmp(Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value))
             frmEmp.TopMost = True
-            frmEmp.preview = True
+
             frmEmp.ShowDialog()
 
             loadData()
@@ -85,32 +83,30 @@ Public Class frmEmployees
     Private Sub EdytujToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EdytujToolStripMenuItem.Click
         Dim curRow = dgvEmployees.CurrentRow.Index
         If curRow >= 0 Then
-
-            Dim emp As Employee = New Employee(dgvEmployees.Rows(curRow).Cells(1).Value, "", "", Globals.findPositionByName(dgvEmployees.Rows(curRow).Cells(2).Value), dgvEmployees.Rows(curRow).Cells(2).Value,
-                                               dgvEmployees.Rows(curRow).Cells(4).Value, dgvEmployees.Rows(curRow).Cells(0).Value)
             Dim frmEmp = New frmEmployeesEdit
-            frmEmp.setEmp(emp)
+            frmEmp.setEmp(Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value))
             frmEmp.TopMost = True
             frmEmp.ShowDialog()
             loadData()
 
         End If
     End Sub
-    Sub setDept()
-        Dim curRow = dgvEmployees.CurrentRow.Index
-        _emp = New Employee(dgvEmployees.Rows(curRow).Cells(1).Value, "", dgvEmployees.Rows(curRow).Cells(2).Value, dgvEmployees.Rows(curRow).Cells(3).Value, dgvEmployees.Rows(curRow).Cells(4).Value, dgvEmployees.Rows(curRow).Cells(0).Value)
-    End Sub
-
     Private Sub UsuńToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuńToolStripMenuItem.Click
+        If MsgBox("Czy na pewno chcesz usunąć tego użytkownika?", MsgBoxStyle.YesNo, "Usuwanie użytkownika") = MsgBoxResult.Yes Then
 
-        Dim curRow = dgvEmployees.CurrentRow.Index
-        _emp = New Employee(dgvEmployees.Rows(curRow).Cells(1).Value, "", dgvEmployees.Rows(curRow).Cells(2).Value, dgvEmployees.Rows(curRow).Cells(3).Value, dgvEmployees.Rows(curRow).Cells(4).Value, dgvEmployees.Rows(curRow).Cells(0).Value)
-        If checkIfInUse(_emp) Then
-            MsgBox("Nie można usunąć pracownka który przypisany!")
-        Else
-            Debug.Print("usuwam " & dgvEmployees.SelectedRows(0).Cells(1).Value)
-            SQLDriver.sqlExeNonQuery("DELETE FROM INV_employees WHERE id = " & dgvEmployees.SelectedRows(1).Cells(1).Value)
 
+            Dim curRow = dgvEmployees.CurrentRow.Index
+            If checkIfAdmin(Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value)) Then
+                Exit Sub
+            End If
+            If checkIfInUse(Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value)) Then
+                MsgBox("Nie można usunąć pracownka który przypisany!")
+            Else
+                Debug.Print("usuwam " & dgvEmployees.SelectedRows(0).Cells(1).Value)
+                Globals.deleteEmployee(Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value))
+                MsgBox("Usunięto użytkownika " & dgvEmployees.Rows(curRow).Cells(1).Value)
+            End If
+            loadData(False)
         End If
     End Sub
 
@@ -128,5 +124,21 @@ Public Class frmEmployees
                 ContextMenuStrip1.Items(1).Enabled = False
             End If
         End If
+    End Sub
+
+    Private Sub frmEmployees_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F5 Then
+            loadData(False)
+        End If
+    End Sub
+
+    Private Sub ĄzaniaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ĄzaniaToolStripMenuItem.Click
+        Dim curRow = dgvEmployees.CurrentRow.Index
+        Dim frm = FindEmployeeRelations
+        frm._emp = Globals.findEmployeeById(dgvEmployees.Rows(curRow).Cells(0).Value)
+        frm.TopMost = True
+
+        frm.ShowDialog()
+
     End Sub
 End Class

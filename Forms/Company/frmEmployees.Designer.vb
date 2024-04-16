@@ -24,18 +24,20 @@ Partial Class frmEmployees
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.dgvEmployees = New System.Windows.Forms.DataGridView()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DodajToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EdytujToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.UsuńToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.emp_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.emp_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.emp_position = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.emp_phone = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.emp_access_lv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DodajToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EdytujToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ĄzaniaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.UsuńToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -57,54 +59,6 @@ Partial Class frmEmployees
         Me.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEmployees.Size = New System.Drawing.Size(804, 414)
         Me.dgvEmployees.TabIndex = 0
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.btnAdd)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(804, 47)
-        Me.Panel1.TabIndex = 1
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(12, 12)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 0
-        Me.btnAdd.Text = "Dodaj"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        Me.btnAdd.Visible = False
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DodajToolStripMenuItem, Me.EdytujToolStripMenuItem, Me.ToolStripSeparator1, Me.UsuńToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 76)
-        '
-        'DodajToolStripMenuItem
-        '
-        Me.DodajToolStripMenuItem.Name = "DodajToolStripMenuItem"
-        Me.DodajToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.DodajToolStripMenuItem.Text = "Dodaj"
-        '
-        'EdytujToolStripMenuItem
-        '
-        Me.EdytujToolStripMenuItem.Name = "EdytujToolStripMenuItem"
-        Me.EdytujToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.EdytujToolStripMenuItem.Text = "Edytuj"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(104, 6)
-        '
-        'UsuńToolStripMenuItem
-        '
-        Me.UsuńToolStripMenuItem.Name = "UsuńToolStripMenuItem"
-        Me.UsuńToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.UsuńToolStripMenuItem.Text = "Usuń"
         '
         'emp_id
         '
@@ -147,6 +101,66 @@ Partial Class frmEmployees
         Me.emp_access_lv.ReadOnly = True
         Me.emp_access_lv.Width = 98
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.btnAdd)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(804, 47)
+        Me.Panel1.TabIndex = 1
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Enabled = False
+        Me.btnAdd.Location = New System.Drawing.Point(12, 12)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.TabIndex = 0
+        Me.btnAdd.Text = "Dodaj"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnAdd.Visible = False
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DodajToolStripMenuItem, Me.EdytujToolStripMenuItem, Me.ToolStripSeparator2, Me.ĄzaniaToolStripMenuItem, Me.ToolStripSeparator1, Me.UsuńToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(172, 104)
+        '
+        'DodajToolStripMenuItem
+        '
+        Me.DodajToolStripMenuItem.Name = "DodajToolStripMenuItem"
+        Me.DodajToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.DodajToolStripMenuItem.Text = "Dodaj"
+        '
+        'EdytujToolStripMenuItem
+        '
+        Me.EdytujToolStripMenuItem.Name = "EdytujToolStripMenuItem"
+        Me.EdytujToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.EdytujToolStripMenuItem.Text = "Edytuj"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(168, 6)
+        '
+        'ĄzaniaToolStripMenuItem
+        '
+        Me.ĄzaniaToolStripMenuItem.Name = "ĄzaniaToolStripMenuItem"
+        Me.ĄzaniaToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ĄzaniaToolStripMenuItem.Text = "Znajdź powiązania"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(168, 6)
+        '
+        'UsuńToolStripMenuItem
+        '
+        Me.UsuńToolStripMenuItem.Name = "UsuńToolStripMenuItem"
+        Me.UsuńToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.UsuńToolStripMenuItem.Text = "Usuń"
+        '
         'frmEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -154,6 +168,7 @@ Partial Class frmEmployees
         Me.ClientSize = New System.Drawing.Size(804, 461)
         Me.Controls.Add(Me.dgvEmployees)
         Me.Controls.Add(Me.Panel1)
+        Me.KeyPreview = True
         Me.MinimumSize = New System.Drawing.Size(820, 500)
         Me.Name = "frmEmployees"
         Me.Text = "frmEmployees"
@@ -177,4 +192,6 @@ Partial Class frmEmployees
     Friend WithEvents emp_position As DataGridViewTextBoxColumn
     Friend WithEvents emp_phone As DataGridViewTextBoxColumn
     Friend WithEvents emp_access_lv As DataGridViewTextBoxColumn
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ĄzaniaToolStripMenuItem As ToolStripMenuItem
 End Class
