@@ -72,16 +72,70 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BaseData\frmTypeAdd.Designer.vb">
+      <DependentUpon>frmTypeAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaseData\frmTypeAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Company\FindRelations\FindEmployeeRelations.Designer.vb">
+      <DependentUpon>FindEmployeeRelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Company\FindRelations\FindEmployeeRelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Company\frmEmployees.Designer.vb">
       <DependentUpon>frmEmployees.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Company\frmEmployees.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Company\frmStartingPage.Designer.vb">
+    <Compile Include="Forms\frmStartingPage.Designer.vb">
       <DependentUpon>frmStartingPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Company\frmStartingPage.vb">
+    <Compile Include="Forms\frmStartingPage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Machines\frmMachines.Designer.vb">
+      <DependentUpon>frmMachines.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Machines\frmMachines.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Machines\frmMachinesEdit.Designer.vb">
+      <DependentUpon>frmMachinesEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Machines\frmMachinesEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Machines\frmPartEdit.Designer.vb">
+      <DependentUpon>frmPartEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Machines\frmPartEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Machines\frmParts.Designer.vb">
+      <DependentUpon>frmParts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Machines\frmParts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Machines\frmPartSelect.Designer.vb">
+      <DependentUpon>frmPartSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Machines\frmPartSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseData\frmPictureSelect.Designer.vb">
+      <DependentUpon>frmPictureSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaseData\frmPictureSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseData\frmManufacturerAdd.Designer.vb">
+      <DependentUpon>frmManufacturerAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaseData\frmManufacturerAdd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.vb">
@@ -92,6 +146,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Misc\Database\Assets\Position.vb" />
+    <Compile Include="Misc\Database\Assets\Type.vb" />
+    <Compile Include="Misc\Database\Picture.vb" />
     <Compile Include="Misc\Globals.vb" />
     <Compile Include="Misc\Database\Assets\Employee.vb" />
     <Compile Include="Misc\Database\Documents\DocumentEntry.vb" />
@@ -99,8 +155,7 @@
     <Compile Include="Misc\Database\Documents\Document.vb" />
     <Compile Include="Misc\Database\Enums.vb" />
     <Compile Include="Misc\Database\Assets\Machine.vb" />
-    <Compile Include="Misc\Database\Assets\MachineData.vb" />
-    <Compile Include="Misc\Database\Assets\MachineParts.vb" />
+    <Compile Include="Misc\Database\Assets\Part.vb" />
     <Compile Include="Misc\Database\Documents\MachineService.vb" />
     <Compile Include="Misc\Database\Manufacturer.vb" />
     <Compile Include="Misc\Database\Assets\Tool.vb" />
@@ -165,11 +220,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\BaseData\frmTypeAdd.resx">
+      <DependentUpon>frmTypeAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Company\FindRelations\FindEmployeeRelations.resx">
+      <DependentUpon>FindEmployeeRelations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Company\frmEmployees.resx">
       <DependentUpon>frmEmployees.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Company\frmStartingPage.resx">
+    <EmbeddedResource Include="Forms\frmStartingPage.resx">
       <DependentUpon>frmStartingPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Machines\frmMachines.resx">
+      <DependentUpon>frmMachines.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Machines\frmMachinesEdit.resx">
+      <DependentUpon>frmMachinesEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Machines\frmPartEdit.resx">
+      <DependentUpon>frmPartEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Machines\frmParts.resx">
+      <DependentUpon>frmParts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Machines\frmPartSelect.resx">
+      <DependentUpon>frmPartSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaseData\frmManufacturerAdd.resx">
+      <DependentUpon>frmManufacturerAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.en.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
@@ -198,6 +277,9 @@
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaseData\frmPictureSelect.resx">
+      <DependentUpon>frmPictureSelect.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -219,6 +301,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\11993624801548336254-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\SimpleAdders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
