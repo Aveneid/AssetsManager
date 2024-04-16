@@ -1,13 +1,13 @@
 ﻿Public Class Employee
     Private Property _id As Integer
-    Public ReadOnly Property id()
+    Public ReadOnly Property id
         Get
             Return _id
         End Get
     End Property
 
     Private Property _name As String
-    Public Property name()
+    Public Property name
         Get
             Return _name
         End Get
@@ -17,7 +17,7 @@
     End Property
 
     Private Property _username As String
-    Public Property username()
+    Public Property username
         Get
             Return _username
         End Get
@@ -26,7 +26,7 @@
         End Set
     End Property
     Private Property _password As String = ""
-    Public Property password()
+    Public Property password
         Get
             Return _password
         End Get
@@ -36,9 +36,9 @@
     End Property
 
     Private Property _position As Position
-    Public Property position()
+    Public Property position
         Get
-            Return _position.id
+            Return _position
         End Get
         Set(value)
             _position = value
@@ -50,7 +50,7 @@
         End Get
     End Property
     Private Property _phone As String
-    Public Property phone() As String
+    Public Property phone As String
         Get
             Return _phone
         End Get
@@ -59,7 +59,7 @@
         End Set
     End Property
     Private Property _access_lv As Integer
-    Public ReadOnly Property access_lv()
+    Public ReadOnly Property access_lv
         Get
             Return _access_lv
         End Get
