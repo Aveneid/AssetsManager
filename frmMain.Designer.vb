@@ -46,6 +46,7 @@ Partial Class frmMain
         Me.pnlBlur = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tslUser = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -192,7 +193,7 @@ Partial Class frmMain
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslUser})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslUser, Me.ToolStripStatusLabel1})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 628)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1107, 22)
@@ -204,6 +205,12 @@ Partial Class frmMain
         Me.tslUser.Name = "tslUser"
         Me.tslUser.Size = New System.Drawing.Size(0, 17)
         '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
+        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -213,6 +220,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.pnlBlur)
         Me.IsMdiContainer = True
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmMain"
         Me.Text = "Form1"
@@ -249,4 +257,5 @@ Partial Class frmMain
     Friend WithEvents pnlBlur As Panel
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents tslUser As ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
 End Class

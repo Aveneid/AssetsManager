@@ -18,10 +18,10 @@ Public Class frmMain
         Next
 
         If Not found Then
-            Dim frm = frmWarehouses
-            frm.MdiParent = Me
-            frm.TopMost = True
-            frm.Show()
+
+            frmWarehouses.MdiParent = Me
+            frmWarehouses.TopMost = True
+            frmWarehouses.Show()
         End If
     End Sub
 
@@ -39,10 +39,10 @@ Public Class frmMain
         Next
 
         If Not found Then
-            Dim frm = frmDepartments
-            frm.MdiParent = Me
-            frm.TopMost = True
-            frm.Show()
+
+            frmDepartments.MdiParent = Me
+            frmDepartments.TopMost = True
+            frmDepartments.Show()
         End If
     End Sub
 
@@ -59,10 +59,8 @@ Public Class frmMain
         pnlBlur.SendToBack()
         MenuStrip1.SendToBack()
 
-        Globals.populatePositions()
-        Globals.populateEmployees()
-        Globals.populateDepartments()
-        Globals.populateWarehouses()
+        Globals.populateAllData()
+
 
 
         frmStartingPage.MdiParent = Me
@@ -94,14 +92,53 @@ Public Class frmMain
         Next
 
         If Not found Then
-            Dim frm = frmEmployees
-            frm.MdiParent = Me
-            frm.TopMost = True
-            frm.Show()
+            frmEmployees.MdiParent = Me
+            frmEmployees.TopMost = True
+            frmEmployees.Show()
         End If
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
+    End Sub
+
+    Private Sub MaszynyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MaszynyToolStripMenuItem.Click
+        Dim found = False
+        For Each f As Form In Application.OpenForms
+            If f.Name = frmMachines.Name Then
+                f.BringToFront()
+                f.Top = 0
+                f.Left = 0
+                f.WindowState = FormWindowState.Maximized
+                found = True
+                Exit For
+            End If
+        Next
+
+        If Not found Then
+            frmMachines.MdiParent = Me
+            frmMachines.TopMost = True
+            frmMachines.Show()
+        End If
+    End Sub
+
+    Private Sub CzęściZamienneToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CzęściZamienneToolStripMenuItem.Click
+        Dim found = False
+        For Each f As Form In Application.OpenForms
+            If f.Name = frmParts.Name Then
+                f.BringToFront()
+                f.Top = 0
+                f.Left = 0
+                f.WindowState = FormWindowState.Maximized
+                found = True
+                Exit For
+            End If
+        Next
+
+        If Not found Then
+            frmParts.MdiParent = Me
+            frmParts.TopMost = True
+            frmParts.Show()
+        End If
     End Sub
 End Class
